@@ -1,0 +1,36 @@
+{
+  "experiment_2": {
+    "all_item_cells": 160,
+    "supported_item_cells": 80,
+    "sparse_item_cells": 80,
+    "supported_group_size_min": 21,
+    "supported_group_size_max": 23,
+    "supported_by_split": {
+      "0": 16,
+      "1": 16,
+      "2": 16,
+      "3": 16,
+      "4": 16
+    },
+    "supported_perm_balance": {
+      "pos": 54,
+      "amb": 26
+    },
+    "supported_intent_balance": {
+      "amb": 56,
+      "neg": 24
+    }
+  },
+  "experiment_1": {
+    "row_count": 3200,
+    "columns": [
+      "worker_id",
+      "scenario_id",
+      "rating",
+      "structure",
+      "type",
+      "strength"
+    ],
+    "note": "Experiment 1 contains target-event valence ratings (rating/structure/type/strength), not direct permissibility and intention judgments. It is not a drop-in replacement for the self-correction benchmark."
+  }
+}

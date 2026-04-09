@@ -1,0 +1,18 @@
+__pycache__/
+.pytest_cache/
+.cache/
+.DS_Store
+*.lock
+
+# Local LaTeX build artifacts
+paper/*.aux
+paper/*.log
+paper/full_paper_draft_v1.md
+paper/full_paper_draft_v2.*
+paper/methods_results_v1.md
+paper/discussion_limitations_conclusion_v1.md
+
+# Keep only the final paper-facing run in git
+results/smoke_*/
+results/pilot_qwen25_core80/
+results/pilot_qwen25_core80_1to5_minimal_v2/

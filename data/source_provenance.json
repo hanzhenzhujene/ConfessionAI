@@ -1,0 +1,5 @@
+{
+  "source_repo": "https://github.com/cicl-stanford/moral-evals",
+  "source_commit": "e8e063a5979eeafa867018c29eba988e2297072b",
+  "source_note": "Prepared from offtherails/prolific-exp-2 batch files and human long-format ratings. This workspace writes both a benchmark-aligned 1-5 table and an adapted 1-7 rescaled table."
+}

@@ -1,0 +1,481 @@
+run_id,model_name,item_id,raw_first_pass,parse_status_first,permissibility_first,negative_intended_first,confidence_first,rationale_first
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""The action improves the park, balancing inconvenience. Intention was not to cause harm.""
+}",ok,4,3,4,"The action improves the park, balancing inconvenience. Intention was not to cause harm."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's action was neutral; she did not intend the negative outcome.""
+}",ok,3,1,4,Maya's action was neutral; she did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's action was a response to city mandate, not personal choice. Intentional harm wasn't intended.""
+}",ok,4,1,4,"Maya's action was a response to city mandate, not personal choice. Intentional harm wasn't intended."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's action was permissible as she did not cause the negative outcome. The intention was not to harm.""
+}",ok,4,3,4,Maya's action was permissible as she did not cause the negative outcome. The intention was not to harm.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's action was permissible as she did not prevent the bike lane implementation. There's no evidence she intended the negative outcome.""
+}",ok,4,3,4,Maya's action was permissible as she did not prevent the bike lane implementation. There's no evidence she intended the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's goal was to improve cycling, not increase parking prices. The price increase was a side effect.""
+}",ok,5,3,4,"Maya's goal was to improve cycling, not increase parking prices. The price increase was a side effect."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's action was neutral. She did not intend the negative outcome.""
+}",ok,3,1,4,Maya's action was neutral. She did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s00_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Maya's action aimed at a positive outcome. The negative outcome was not intended.""
+}",ok,5,3,4,Maya's action aimed at a positive outcome. The negative outcome was not intended.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""The downtime was unintended; upgrades often require temporary disruptions.""
+}",ok,3,1,4,The downtime was unintended; upgrades often require temporary disruptions.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Alejandro's action was neutral. He did not intend the negative outcome.""
+}",ok,3,1,4,Alejandro's action was neutral. He did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""The upgrade was a proactive measure, not intended to cause harm.""
+}",ok,4,1,4,"The upgrade was a proactive measure, not intended to cause harm."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Alejandro's action was reasonable, but he did not intend the negative outcome.""
+}",ok,4,3,4,"Alejandro's action was reasonable, but he did not intend the negative outcome."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""The upgrade benefits the environment, justifying the noise issue.""
+}",ok,4,3,4,"The upgrade benefits the environment, justifying the noise issue."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""The upgrade benefits the environment, not intentionally causing noise.""
+}",ok,3,1,4,"The upgrade benefits the environment, not intentionally causing noise."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""The upgrade was necessary for compliance and the noise was a side effect, not an intended negative outcome.""
+}",ok,4,3,4,"The upgrade was necessary for compliance and the noise was a side effect, not an intended negative outcome."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s01_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""The upgrade aligns with environmental goals, and there was no intent to cause disturbance.""
+}",ok,4,3,4,"The upgrade aligns with environmental goals, and there was no intent to cause disturbance."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amir's action aimed to help students, not harm. Attending earlier is a means, not an intended negative.""
+}",ok,4,3,4,"Amir's action aimed to help students, not harm. Attending earlier is a means, not an intended negative."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 5,
+  ""rationale_short"": ""Amir allowed the method, deeming it permissible. He did not intend harm.""
+}",ok,4,1,5,"Amir allowed the method, deeming it permissible. He did not intend harm."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amir's action was reasonable given the circumstances. He did not intend the negative outcome.""
+}",ok,4,3,4,Amir's action was reasonable given the circumstances. He did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amir's action was permissible as he did not prevent the new method. There's no evidence he intended the negative outcome.""
+}",ok,4,3,4,Amir's action was permissible as he did not prevent the new method. There's no evidence he intended the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amir's action aimed at efficiency, not harm. The negative outcome was unintended.""
+}",ok,4,3,4,"Amir's action aimed at efficiency, not harm. The negative outcome was unintended."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amir's action was neutral; he did not intend the negative outcome.""
+}",ok,3,1,4,Amir's action was neutral; he did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amir acted to improve efficiency, not causing intentional harm.""
+}",ok,4,1,4,"Amir acted to improve efficiency, not causing intentional harm."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s02_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 5,
+  ""rationale_short"": ""Amir's action was permissible as he did not cause the negative outcome. He did not intend it.""
+}",ok,4,3,5,Amir's action was permissible as he did not cause the negative outcome. He did not intend it.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei's action aimed to improve patient experience, not cause delays. The delay was an unintended consequence.""
+}",ok,4,3,4,"Mei's action aimed to improve patient experience, not cause delays. The delay was an unintended consequence."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei's action was neutral; she did not intend harm but allowed it to occur.""
+}",ok,3,1,4,Mei's action was neutral; she did not intend harm but allowed it to occur.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei acted to improve patient experience, not to cause delays. The delay was an unintended consequence.""
+}",ok,4,3,4,"Mei acted to improve patient experience, not to cause delays. The delay was an unintended consequence."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei's action was reasonable given the unavoidable delay. She did not intend the negative outcome.""
+}",ok,4,3,4,Mei's action was reasonable given the unavoidable delay. She did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei's action aimed to improve efficiency, not harm. Discomfort was a side effect.""
+}",ok,4,3,4,"Mei's action aimed to improve efficiency, not harm. Discomfort was a side effect."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei's action was neutral; she did not intend harm but prioritized efficiency over patient comfort.""
+}",ok,3,1,4,Mei's action was neutral; she did not intend harm but prioritized efficiency over patient comfort.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Mei acted to comply with regulations, balancing patient comfort. Intention was not to cause discomfort.""
+}",ok,4,3,4,"Mei acted to comply with regulations, balancing patient comfort. Intention was not to cause discomfort."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s03_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 5,
+  ""rationale_short"": ""Mei's action aligns with not actively causing harm. Intention was to comply, not cause discomfort.""
+}",ok,4,3,5,"Mei's action aligns with not actively causing harm. Intention was to comply, not cause discomfort."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""The change was to improve the restaurant, not to cause disappointment.""
+}",ok,4,3,4,"The change was to improve the restaurant, not to cause disappointment."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amina's action was neutral. She did not intend the negative outcome.""
+}",ok,3,1,4,Amina's action was neutral. She did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""The change was to improve the business, not to cause disappointment.""
+}",ok,4,3,4,"The change was to improve the business, not to cause disappointment."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amina's action was a response to unavoidable circumstances, not intentional harm.""
+}",ok,4,3,4,"Amina's action was a response to unavoidable circumstances, not intentional harm."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Switching to biodegradable packaging is environmentally beneficial, and the negative outcome was not intended.""
+}",ok,5,3,4,"Switching to biodegradable packaging is environmentally beneficial, and the negative outcome was not intended."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 5,
+  ""rationale_short"": ""Amina's action aligns with environmental responsibility. Intention is unclear as the negative outcome was a side effect, not a goal.""
+}",ok,4,3,5,"Amina's action aligns with environmental responsibility. Intention is unclear as the negative outcome was a side effect, not a goal."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Switching to biodegradable packaging aligns with environmental responsibility. Lack of intent to cause negative outcomes is neutral.""
+}",ok,5,3,4,Switching to biodegradable packaging aligns with environmental responsibility. Lack of intent to cause negative outcomes is neutral.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s04_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 5,
+  ""rationale_short"": ""Amina's action aligned with environmental responsibility. She did not intend the negative outcome.""
+}",ok,5,3,5,Amina's action aligned with environmental responsibility. She did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's action aimed at promoting art, not harming community activities.""
+}",ok,4,3,4,"Isamu's action aimed at promoting art, not harming community activities."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's action was neutral; he did not intend the negative outcome.""
+}",ok,3,1,4,Isamu's action was neutral; he did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's action aimed at promoting art, not causing disruption. The negative outcome was a side effect.""
+}",ok,4,3,4,"Isamu's action aimed at promoting art, not causing disruption. The negative outcome was a side effect."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's action was neutral; he did not intend the negative outcome.""
+}",ok,3,1,4,Isamu's action was neutral; he did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's use was permissible; he didn't intend the longer drying time.""
+}",ok,5,3,4,Isamu's use was permissible; he didn't intend the longer drying time.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's action was neutral. He did not intend the delay.""
+}",ok,3,1,4,Isamu's action was neutral. He did not intend the delay.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 5,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Using eco-friendly paint aligns with environmental values. Lack of intent to cause delays is neutral.""
+}",ok,5,3,4,Using eco-friendly paint aligns with environmental values. Lack of intent to cause delays is neutral.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s05_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Isamu's action was reasonable given the circumstances. He did not intend the negative outcome.""
+}",ok,4,3,4,Isamu's action was reasonable given the circumstances. He did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action aimed at skill improvement, not harm. Junior associates' extra work was a side effect.""
+}",ok,4,3,4,"Sanaa's action aimed at skill improvement, not harm. Junior associates' extra work was a side effect."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action was neutral; she did not intend harm.""
+}",ok,3,1,4,Sanaa's action was neutral; she did not intend harm.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action was reasonable given the circumstances. She did not intend the negative outcome.""
+}",ok,4,3,4,Sanaa's action was reasonable given the circumstances. She did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action was neutral; she did not intend the negative outcome.""
+}",ok,3,1,4,Sanaa's action was neutral; she did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action aimed to improve efficiency, not harm learning. The negative was unintended.""
+}",ok,4,3,4,"Sanaa's action aimed to improve efficiency, not harm learning. The negative was unintended."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action was neutral; she did not intend harm.""
+}",ok,3,1,4,Sanaa's action was neutral; she did not intend harm.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action aimed to improve efficiency, not harm learning. The negative was unintended.""
+}",ok,4,3,4,"Sanaa's action aimed to improve efficiency, not harm learning. The negative was unintended."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s06_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Sanaa's action was neutral; she did not intend the negative outcome.""
+}",ok,3,1,4,Sanaa's action was neutral; she did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action aimed at efficiency, not customer inconvenience.""
+}",ok,4,3,4,"Diego's action aimed at efficiency, not customer inconvenience."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action was neutral. He did not intend the delay.""
+}",ok,3,1,4,Diego's action was neutral. He did not intend the delay.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action aimed at efficiency, not delaying service. The delay was unavoidable.""
+}",ok,4,3,4,"Diego's action aimed at efficiency, not delaying service. The delay was unavoidable."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action was reasonable, but he did not intend the negative outcome.""
+}",ok,4,3,4,"Diego's action was reasonable, but he did not intend the negative outcome."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action was likely permissible as the noise was a side effect, not an intended outcome.""
+}",ok,4,1,4,"Diego's action was likely permissible as the noise was a side effect, not an intended outcome."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action was neutral; he did not intend the distraction.""
+}",ok,3,1,4,Diego's action was neutral; he did not intend the distraction.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action was permissible as the noise was a side effect, not an intended negative outcome.""
+}",ok,4,3,4,"Diego's action was permissible as the noise was a side effect, not an intended negative outcome."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s07_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Diego's action was reasonable given the circumstances. He did not intend the distraction.""
+}",ok,4,3,4,Diego's action was reasonable given the circumstances. He did not intend the distraction.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's action aimed at improvement, not harm. Removing protection was a means to an end.""
+}",ok,4,1,4,"Amara's action aimed at improvement, not harm. Removing protection was a means to an end."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's action was neutral; she did not intend harm but allowed it to occur.""
+}",ok,3,1,4,Amara's action was neutral; she did not intend harm but allowed it to occur.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's action was a test, not an intentional harm. Regulations influenced the decision.""
+}",ok,4,1,4,"Amara's action was a test, not an intentional harm. Regulations influenced the decision."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's action was neutral; she did not intend the negative outcome but allowed it to occur.""
+}",ok,3,1,4,Amara's action was neutral; she did not intend the negative outcome but allowed it to occur.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's participation was permissible for training benefits, but she did not intend the dizziness.""
+}",ok,4,3,4,"Amara's participation was permissible for training benefits, but she did not intend the dizziness."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's action was neutral; she did not intend the dizziness but allowed it to occur.""
+}",ok,3,1,4,Amara's action was neutral; she did not intend the dizziness but allowed it to occur.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's participation was a means to an end, not aimed at the negative outcome.""
+}",ok,4,3,4,"Amara's participation was a means to an end, not aimed at the negative outcome."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s08_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Amara's action was reasonable given the circumstances. She did not intend the negative outcome.""
+}",ok,4,3,4,Amara's action was reasonable given the circumstances. She did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_cc_evitable_action_yes,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Neutral on permissibility; confident Thanh did not intend the negative outcome.""
+}",ok,3,1,4,Neutral on permissibility; confident Thanh did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_cc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Thanh's action was neutral. He did not intend the negative outcome.""
+}",ok,3,1,4,Thanh's action was neutral. He did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_cc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 5,
+  ""rationale_short"": ""Thanh's action was a response to an unavoidable outcome, not intended to harm.""
+}",ok,4,1,5,"Thanh's action was a response to an unavoidable outcome, not intended to harm."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_cc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Thanh's action was neutral; he did not intend the negative outcome.""
+}",ok,3,1,4,Thanh's action was neutral; he did not intend the negative outcome.
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_coc_evitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Thanh's action aimed to improve efficiency, not cause frustration. The negative outcome was an unintended consequence.""
+}",ok,4,3,4,"Thanh's action aimed to improve efficiency, not cause frustration. The negative outcome was an unintended consequence."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_coc_evitable_prevention_no,"{
+  ""permissibility_agreement"": 3,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 4,
+  ""rationale_short"": ""Thanh's action was neutral. He did not intend the frustration, making it permissible.""
+}",ok,3,1,4,"Thanh's action was neutral. He did not intend the frustration, making it permissible."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_coc_inevitable_action_yes,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 3,
+  ""confidence"": 4,
+  ""rationale_short"": ""Thanh's action aimed to improve efficiency, not cause frustration. The negative outcome was an unintended consequence.""
+}",ok,4,3,4,"Thanh's action aimed to improve efficiency, not cause frustration. The negative outcome was an unintended consequence."
+pilot_qwen25_core80_1to5_minimal_v2,qwen2.5:7b-instruct,otr_s09_coc_inevitable_prevention_no,"{
+  ""permissibility_agreement"": 4,
+  ""negative_outcome_intended_agreement"": 1,
+  ""confidence"": 5,
+  ""rationale_short"": ""Thanh's action was a pragmatic choice. He did not intend the frustration, seeing it as an inevitable policy shift.""
+}",ok,4,1,5,"Thanh's action was a pragmatic choice. He did not intend the frustration, seeing it as an inevitable policy shift."

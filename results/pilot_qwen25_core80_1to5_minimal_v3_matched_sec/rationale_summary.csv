@@ -1,0 +1,7 @@
+revision_condition_id,n_rows,first_outcome_rate,final_outcome_rate,shift_to_outcome_rate,first_intention_rate,final_intention_rate,shift_to_intention_rate,first_structure_rate,final_structure_rate,shift_to_structure_rate,first_responsibility_rate,final_responsibility_rate,shift_to_responsibility_rate,first_meta_revision_rate,final_meta_revision_rate,shift_to_meta_revision_rate
+christian_examen,80,0.775,0.2125,0.05,0.4125,0.0125,0.0125,0.1375,0.0,0.0,0.0625,0.025,0.025,0.0,1.0,1.0
+christian_identity_only,80,0.775,0.55,0.075,0.4125,0.35,0.1375,0.1375,0.0375,0.025,0.0625,0.2625,0.2125,0.0,0.0,0.0
+generic_reconsider,80,0.775,0.5625,0.0625,0.4125,0.4125,0.1375,0.1375,0.025,0.025,0.0625,0.175,0.1625,0.0,0.0,0.0
+matched_secular_reflective,80,0.775,0.5125,0.125,0.4125,0.35,0.1,0.1375,0.0,0.0,0.0625,0.1,0.075,0.0,0.35,0.35
+moral_checklist,80,0.775,0.8125,0.1375,0.4125,0.5375,0.2875,0.1375,0.2125,0.175,0.0625,0.45,0.4125,0.0,0.0,0.0
+secular_self_examination,80,0.775,0.4625,0.1,0.4125,0.2875,0.0875,0.1375,0.0,0.0,0.0625,0.2,0.175,0.0,0.3625,0.3625

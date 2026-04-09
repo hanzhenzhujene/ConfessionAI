@@ -1,0 +1,11 @@
+baseline_condition,comparison_condition,metric,n_items,mean_difference,ci_low,ci_high,ci_excludes_zero,better_if_negative
+christian_identity_only,christian_examen,perm_distance_final,80,-0.5891116500000001,-0.7700828999999998,-0.42010404999999995,1,yes
+christian_identity_only,christian_examen,intent_distance_final,80,-0.05875912500000002,-0.21245525,0.09138677499999998,0,yes
+generic_reconsider,christian_examen,perm_distance_final,80,-0.7539149749999998,-0.933545125,-0.5823923,1,yes
+generic_reconsider,christian_examen,intent_distance_final,80,-0.08375912500000002,-0.24147132500000001,0.07123804999999997,0,yes
+matched_secular_reflective,christian_examen,perm_distance_final,80,-0.24658622500000002,-0.36966407500000004,-0.134032125,1,yes
+matched_secular_reflective,christian_examen,intent_distance_final,80,0.13674009999999998,0.0027032749999999716,0.2694688,1,yes
+moral_checklist,christian_examen,perm_distance_final,80,-0.7657421000000001,-0.9427936750000001,-0.592160775,1,yes
+moral_checklist,christian_examen,intent_distance_final,80,-0.20239035000000002,-0.36975110000000005,-0.035497825000000004,1,yes
+secular_self_examination,christian_examen,perm_distance_final,80,-0.7664149749999998,-0.923313175,-0.608775675,1,yes
+secular_self_examination,christian_examen,intent_distance_final,80,-0.2639516250000001,-0.411570675,-0.11450212500000001,1,yes
