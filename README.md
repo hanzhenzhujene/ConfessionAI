@@ -14,6 +14,44 @@ The central intervention is a family of revision prompts inspired by **confessio
 
 ![Main quantitative results](paper/figures/main_quantitative_results.png)
 
+## Method in One Figure
+
+For readers outside moral reasoning or alignment, the project can be summarized very simply:
+
+- The study does **not** test whether Christian language directly teaches the model a better moral doctrine.
+- It tests whether a particular reflective prompt helps the model **revise its own first answer more effectively**.
+- The same first-pass answer is cached and replayed across all revision conditions, so the manipulated variable is the **revision scaffold**, not first-pass randomness.
+
+```mermaid
+flowchart LR
+    A["Structured moral dilemma<br/>from OffTheRails"] --> B["First-pass judgment<br/>permissibility + intention + confidence"]
+    B --> C["Cache the exact same first-pass output"]
+    C --> D1["Generic reconsideration"]
+    C --> D2["Moral checklist"]
+    C --> D3["Secular self-examination"]
+    C --> D4["Matched secular reflective"]
+    C --> D5["Christian identity only"]
+    C --> D6["Christian examen"]
+
+    D1 --> E["Revised judgment"]
+    D2 --> E
+    D3 --> E
+    D4 --> E
+    D5 --> E
+    D6 --> E
+
+    F["Human-rated benchmark target"] --> G["Compare final distance to human mean"]
+    E --> G
+
+    G --> H1["Closer to human judgment<br/>with controlled volatility<br/>= better revision"]
+    G --> H2["More answer changes<br/>without better calibration<br/>= worse revision"]
+```
+
+The logic of the paper is therefore:
+
+> not “Which prompt sounds more moral?”  
+> but “Which prompt helps the model re-examine its own judgment without becoming indiscriminately more volatile?”
+
 ## Project at a Glance
 
 | Item | Value |
