@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-2ea44f)](LICENSE)
 [![Main Finding](https://img.shields.io/badge/Finding-Stable%20permissibility%20revision%20under%20Christian%20examen-0a7f5a)](paper/full_paper_draft_v3.pdf)
 
-Repository for a NeurIPS-style research paper and reproducible experiment package on **moral self-correction in language models**. The project asks whether a model can be prompted not only to produce a moral judgment, but to **revise its own earlier judgment more effectively**.
+Repository for a research paper and reproducible experiment package on **moral self-correction in language models**. The project asks whether a model can be prompted not only to produce a moral judgment, but to **revise its own earlier judgment more effectively**.
 
 The central intervention is a family of revision prompts inspired by **confession / examen / self-examination**. The main empirical question is whether those prompts improve revision quality by changing the model's **mode of reconsideration**, rather than by injecting new moral content.
 
