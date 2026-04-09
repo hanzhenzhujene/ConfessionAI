@@ -10,7 +10,7 @@ This project asks whether **Christian reflective framing**, especially an examen
 
 ## The memorable result
 
-The strongest result from the final v3 run is not “Christian prompts beat everything.”
+The strongest result from the final run is not “Christian prompts beat everything.”
 
 It is narrower and more interesting:
 
@@ -45,16 +45,14 @@ That distinction turns out to matter a lot. In this repo’s final run, several 
 
 ## Final deliverables
 
-- Final paper draft: [paper/full_paper_draft_v3.md](paper/full_paper_draft_v3.md)
 - Final PDF: [paper/full_paper_draft_v3.pdf](paper/full_paper_draft_v3.pdf)
-- Final LaTeX: [paper/full_paper_draft_v3.tex](paper/full_paper_draft_v3.tex)
-- Final reviewer-strengthened run: [results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec](results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec)
+- Final experiment run: [results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec](results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec)
 
 ## What the final run shows
 
 The main benchmark is the human-rated OffTheRails Experiment 2 core subset, using the benchmark-aligned `1-5` scale and a `continuous_primary` evaluation profile.
 
-In the final v3 run:
+In the final run:
 
 - `christian_examen` improves permissibility with `mean delta = -0.131`, `95% CI [-0.242, -0.020]`
 - `matched_secular_reflective` has `perm delta = 0.115`, `95% CI [-0.018, 0.250]`
@@ -96,15 +94,13 @@ python3 scripts/summarize_results.py --run-dir results/pilot_qwen25_core80_1to5_
 python3 scripts/code_rationales.py --run-dir results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec
 python3 scripts/audit_experiment.py --run-dir results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec --items-file data/items_offtherails_core.csv
 python3 scripts/build_paper_artifacts.py --run-dir results/pilot_qwen25_core80_1to5_minimal_v3_matched_sec
-pandoc paper/full_paper_draft_v3.md -s --number-sections -o paper/full_paper_draft_v3.tex --from markdown --to latex
-pdflatex -interaction=nonstopmode -halt-on-error -output-directory paper paper/full_paper_draft_v3.tex
-pdflatex -interaction=nonstopmode -halt-on-error -output-directory paper paper/full_paper_draft_v3.tex
+python3 scripts/render_paper.py
 ```
 
 ## Important caveats
 
 - This benchmark subset is **not** balanced enough for binary-primary self-correction claims, so the paper uses continuous distance-to-human-mean as the main metric.
-- The current paper is based on a **single model**: `qwen2.5:7b-instruct` through Ollama.
+- The paper is based on a **single model**: `qwen2.5:7b-instruct` through Ollama.
 - The rationale coding is **exploratory**, not a proof of internal mechanism.
 - The current contribution is best read as a result about **revision scaffolding**, not theological superiority.
 

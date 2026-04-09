@@ -84,6 +84,40 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
+\usepackage{xparse}
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -93,14 +127,16 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Not Better Answers, Better Revisions: Christian Reflective Framing and Moral Self-Correction in Language Models},
-  pdfauthor={Working Draft},
+  pdfauthor={Anonymous Authors},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
+\usepackage[preprint,nonatbib]{paper/neurips_2023}
+
 \title{Not Better Answers, Better Revisions: Christian Reflective
 Framing and Moral Self-Correction in Language Models}
-\author{Working Draft}
-\date{2026-04-08}
+\author{Anonymous Authors}
+\date{}
 
 \begin{document}
 \maketitle
@@ -120,7 +156,7 @@ secular reflective control, Christian identity framing, and Christian
 examen-style reflection. Because the supported OffTheRails core subset
 is not decision-balanced enough for binary-primary correction claims, we
 use continuous distance-to-human-mean metrics as our primary endpoints.
-In a clean run with \texttt{qwen2.5:7b-instruct}, Christian examen
+In the main run with \texttt{qwen2.5:7b-instruct}, Christian examen
 remains the only condition with a robust permissibility improvement
 (\texttt{mean\ delta\ =\ -0.131},
 \texttt{95\%\ CI\ {[}-0.242,\ -0.020{]}}) and it outperforms the matched
@@ -148,12 +184,18 @@ necessarily a model that can recognize that its own initial moral
 judgment was shallow, incomplete, or mistaken.
 
 Most existing moral evaluation work, however, still emphasizes
-first-pass performance. Benchmarks such as ETHICS and related datasets
-have been valuable for measuring whether models can reproduce broad
-human moral judgments or generate socially acceptable continuations. But
-these resources are less informative about second-order revision:
-whether a model can revisit its own earlier judgment, identify what it
-neglected, and improve the judgment rather than simply changing it. This
+first-pass performance. Benchmarks such as ETHICS
+(\citeproc{ref-hendrycks2020aligning}{Hendrycks et al. 2020}), Moral
+Stories (\citeproc{ref-emelin2020moral}{Emelin et al. 2020}), and Delphi
+(\citeproc{ref-jiang2021delphi}{Jiang et al. 2021}) have been valuable
+for measuring whether models can reproduce broad human moral judgments,
+classify acceptable actions, or generate norm-sensitive continuations.
+More recent work also shows that models encode distinct and sometimes
+unstable moral tendencies under different elicitation procedures
+(\citeproc{ref-scherrer2023moral}{Scherrer et al. 2023}). But these
+resources are less informative about second-order revision: whether a
+model can revisit its own earlier judgment, identify what it neglected,
+and improve the judgment rather than simply changing it. This
 distinction matters because moral errors are often not failures of
 factual knowledge. They frequently arise when an agent overweights one
 salient feature of a case while neglecting another, such as outcome over
@@ -183,27 +225,57 @@ framing helps a model, the most interesting interpretation is not that
 the model has become ``more Christian'' in a static sense, but that it
 has become better at revisiting its own judgment.
 
-To test this hypothesis, we use OffTheRails as the primary benchmark.
-OffTheRails is especially valuable for this project because it
-procedurally varies moral structure, including means versus side effect,
-avoidability, and commission versus omission. These dimensions make it
-possible to study not only whether a model changes its answer, but also
-whether revision moves judgments closer to the human target on
-structurally meaningful dilemmas. At the same time, our source profiling
-shows an important constraint: the well-supported human-rated Experiment
-2 subset is not decision-balanced enough for binary-primary correction
-claims. For that reason, we frame the present experiment around
-benchmark-aligned continuous distance-to-human-mean metrics rather than
-headline binary wrong-to-right rates.
+The revision focus places this paper at the intersection of two
+literatures. One is the growing body of work on self-correction,
+self-refinement, and critique-based revision in language models
+(\citeproc{ref-bai2022constitutional}{Bai et al. 2022};
+\citeproc{ref-madaan2023selfrefine}{Madaan et al. 2023};
+\citeproc{ref-shinn2023reflexion}{Shinn et al. 2023};
+\citeproc{ref-gou2023critic}{Gou et al. 2023};
+\citeproc{ref-kamoi2024survey}{Kamoi et al. 2024}). That literature
+shows that models sometimes improve when asked to critique or revise
+their own outputs, but also that self-correction is unreliable,
+prompt-sensitive, and often prone to over-editing or false-positive
+self-critique (\citeproc{ref-valmeekam2023selfcritiquing}{Valmeekam,
+Marquez, and Kambhampati 2023}; \citeproc{ref-li2024confidence}{Li et
+al. 2024}; \citeproc{ref-liu2024intrinsic}{D. Liu et al. 2024};
+\citeproc{ref-liu2024uncertainty}{G. Liu, Mao, et al. 2024}). The other
+is the literature on moral prompting and value-laden framing. Work on
+religious or spiritual framing shows that LLM justifications are
+sensitive to normative vocabulary (\citeproc{ref-kucuk2023western}{Kucuk
+and Kocyigit 2023}), while work on moral self-correction shows that
+aligned models can sometimes reduce harmful outputs when explicitly
+asked to reconsider them (\citeproc{ref-ganguli2023moral}{Ganguli et al.
+2023}; \citeproc{ref-liu2024smaller}{G. Liu, Xue, et al. 2024}). What is
+still missing is a controlled test of whether a historically specific
+reflective form changes revision quality on structured moral dilemmas.
+
+To test this hypothesis, we use OffTheRails as the primary benchmark
+(\citeproc{ref-franken2024procedural}{Fränken et al. 2024}). OffTheRails
+is especially valuable for this project because it procedurally varies
+moral structure, including means versus side effect, avoidability, and
+commission versus omission. These dimensions make it possible to study
+not only whether a model changes its answer, but also whether revision
+moves judgments closer to the human target on structurally meaningful
+dilemmas. We also draw on the richer dilemma framing of Conscience
+Conflict as a qualitative reference point for why explanation and
+justification matter in moral evaluation
+(\citeproc{ref-hota2025conscience}{Hota and Jokinen 2025}). At the same
+time, our source profiling shows an important constraint: the
+well-supported human-rated Experiment 2 subset is not decision-balanced
+enough for binary-primary correction claims. For that reason, we frame
+the present experiment around benchmark-aligned continuous
+distance-to-human-mean metrics rather than headline binary
+wrong-to-right rates.
 
 The main comparison in this paper is not simply religious versus
 non-religious language. It is reflective Christian framing versus
 generic and secular alternatives, including a new matched secular
 reflective control that preserves introspective structure and rhetorical
 gravity while removing Christian lexical markers. This matters because
-one of the central reviewer-facing questions for any framing paper is
-whether the winning condition is genuinely better matched, longer, or
-more structured than its controls. We therefore treat the result as a
+the strongest alternative explanation for any framing result is that the
+apparent winner was simply longer, more structured, or more directive
+than its controls. We therefore treat the present result as a
 comparative behavioral result rather than a final proof that Christian
 wording itself is essential.
 
@@ -211,15 +283,14 @@ The paper makes three nested claims. First, at the empirical level,
 Christian examen is the only tested condition that robustly improves
 permissibility on the benchmark-aligned continuous metric, while also
 remaining far less volatile than the strongest alternatives. Second, at
-the comparative level, it clearly outperforms
-\texttt{christian\_identity\_only}, which shows that Christian identity
-language alone is not doing the work, and it also outperforms the
-matched secular reflective control on permissibility. Third, at the
-interpretive level, the resulting pattern is associated with a
-self-monitoring or meta-revision mode: one historically Christian
-reflective form appears especially useful for stable permissibility
-revision, while a broader confession-like reflective family may still
-help on intention-sensitive revision.
+the comparative level, it clearly outperforms Christian identity only,
+which shows that Christian identity language alone is not doing the
+work, and it also outperforms the matched secular reflective control on
+permissibility. Third, at the interpretive level, the resulting pattern
+is associated with a self-monitoring or meta-revision mode: one
+historically Christian reflective form appears especially useful for
+stable permissibility revision, while a broader confession-like
+reflective family may still help on intention-sensitive revision.
 
 \section{Related Work}\label{related-work}
 
@@ -229,57 +300,92 @@ Models}\label{moral-evaluation-in-language-models}
 A large body of work evaluates whether language models can reproduce
 human moral judgments or generate morally acceptable responses. ETHICS
 established a broad benchmark for moral classification across domains
-such as commonsense morality, justice, duty, and virtue. Moral Stories
-extended the problem from classification to situated generation
-involving norms, actions, intentions, and consequences. This literature
-has been foundational, but it has mainly centered on first-pass moral
-performance: whether a model can produce an acceptable answer when
-prompted once.
+such as commonsense morality, justice, duty, and virtue
+(\citeproc{ref-hendrycks2020aligning}{Hendrycks et al. 2020}). Moral
+Stories extended the problem from static classification to situated
+generation involving norms, intentions, actions, and consequences
+(\citeproc{ref-emelin2020moral}{Emelin et al. 2020}). Delphi pushed
+further toward machine-generated moral advice by training a system to
+respond to everyday moral questions
+(\citeproc{ref-jiang2021delphi}{Jiang et al. 2021}). Together, these
+papers helped establish that models can often imitate broad human moral
+patterns, but they also encouraged a first-pass view of moral
+competence: moral evaluation was largely framed as getting the answer
+right when prompted once.
 
-OffTheRails is especially important for the present study because it
-moves closer to structured moral dilemmas. Rather than evaluating only
-coarse acceptability, it procedurally varies dimensions such as means
-versus side effect, avoidability, and commission versus omission. That
-makes it a better fit for revision research, since it allows us to ask
-not only whether a model changes its answer, but whether revision tracks
-morally relevant structure. The current study builds on that advantage
-while also showing that the human-rated core subset is not balanced
-enough to support binary-primary correction claims.
+Recent work has started to probe moral reasoning more structurally.
+Scherrer et al.~show that LLMs encode recoverable moral beliefs that
+vary across elicitation regimes and topical slices
+(\citeproc{ref-scherrer2023moral}{Scherrer et al. 2023}). OffTheRails
+moves closer to controlled dilemma analysis by procedurally varying
+means versus side effect, avoidability, and commission versus omission
+(\citeproc{ref-franken2024procedural}{Fränken et al. 2024}). Conscience
+Conflict complements this style of benchmark by focusing on richer,
+high-stakes vignettes that require a choice together with a
+justification (\citeproc{ref-hota2025conscience}{Hota and Jokinen
+2025}). We build primarily on OffTheRails because its causal structure
+makes revision behavior analyzable rather than merely observable.
 
 \subsection{Self-Correction and Revision
 Behavior}\label{self-correction-and-revision-behavior}
 
 A separate literature studies whether language models can improve their
-own outputs through critique, reflection, or reconsideration. Some work
-suggests that models can reduce harmful or low-quality outputs when
-explicitly prompted to revise them. Other work has shown that
-self-critique is unreliable when it is not grounded by good verification
-signals, and that prompting more revision often increases volatility
-rather than accuracy. This line of research suggests an important
-distinction: the ability to revise is not identical to the ability to
-answer well on first pass, and revision prompting can help or harm
-depending on how it organizes the model's attention.
+own outputs through critique, reflection, or reconsideration.
+Constitutional AI is one important precursor because it uses
+principle-guided critique and revision to reduce harmful behavior
+(\citeproc{ref-bai2022constitutional}{Bai et al. 2022}). Self-Refine,
+Reflexion, and CRITIC show that iterative feedback, verbal reflection,
+and tool-interactive critique can improve a variety of tasks under the
+right conditions (\citeproc{ref-madaan2023selfrefine}{Madaan et al.
+2023}; \citeproc{ref-shinn2023reflexion}{Shinn et al. 2023};
+\citeproc{ref-gou2023critic}{Gou et al. 2023}). In the moral domain
+specifically, Ganguli et al.~argue that aligned models exhibit a
+nontrivial capacity for moral self-correction, and later work shows that
+this behavior is not restricted to only the largest models
+(\citeproc{ref-ganguli2023moral}{Ganguli et al. 2023};
+\citeproc{ref-liu2024smaller}{G. Liu, Xue, et al. 2024}).
 
-Our results fit this broader picture. Generic reconsideration, checklist
-prompting, and secular self-examination all induce substantial revision,
-but usually worsen permissibility on the benchmark-aligned continuous
-metric. The matched secular reflective control improves intention more
-strongly than Christian examen, but it also over-revises maximally and
-does not robustly improve permissibility. This makes the present paper
-part of a broader argument that revision quality should be treated as a
-distinct empirical target, not assumed to follow automatically from
-first-pass competence.
+At the same time, the self-correction literature is increasingly
+cautious about when such gains are real. Valmeekam et al.~show that
+self-critique can degrade performance when models lack reliable
+verification signals
+(\citeproc{ref-valmeekam2023selfcritiquing}{Valmeekam, Marquez, and
+Kambhampati 2023}). Confidence-aware work argues that intrinsic
+self-correction depends strongly on uncertainty calibration
+(\citeproc{ref-li2024confidence}{Li et al. 2024}), while more recent
+papers suggest that apparent self-correction ability may arise from
+latent confidence signals or prompt-induced re-elicitation rather than
+from a stable reasoning faculty (\citeproc{ref-liu2024intrinsic}{D. Liu
+et al. 2024}; \citeproc{ref-liu2024uncertainty}{G. Liu, Mao, et al.
+2024}). Kamoi et al.'s survey distills this into a broader
+methodological lesson: self-correction is not a monolithic capability
+and should be studied with careful task design, matched comparisons, and
+uncertainty reporting (\citeproc{ref-kamoi2024survey}{Kamoi et al.
+2024}). Our results fit that broader picture. Generic reconsideration,
+checklist prompting, and secular self-examination all induce substantial
+revision, but usually worsen permissibility on the benchmark-aligned
+continuous metric. The matched secular reflective control improves
+intention more strongly than Christian examen, but it also over-revises
+maximally and does not robustly improve permissibility. This makes the
+present paper part of a broader argument that revision quality should be
+treated as a distinct empirical target, not assumed to follow
+automatically from first-pass competence.
 
 \subsection{Religious Framing and Moral
 Justification}\label{religious-framing-and-moral-justification}
 
 A smaller but growing literature studies religious or value-laden
-framing in language models. Some work compares Western, religious, and
-spiritual justifications and asks which moral style a model appears to
-endorse. That literature is useful because it shows that model outputs
-are sensitive to normative framing. But its central question is usually
-one of perspective alignment or stylistic endorsement: which tradition
-the model sounds like, or whether a religious framing shifts first-pass
+framing in language models. Kucuk and Kocyigit compare Western,
+religious, and spiritual framings and show that the justificatory style
+of LLM outputs shifts under those moral vocabularies
+(\citeproc{ref-kucuk2023western}{Kucuk and Kocyigit 2023}). More
+generally, prompt-sensitive moral-belief work suggests that model
+outputs can change substantially depending on how normative questions
+are asked (\citeproc{ref-scherrer2023moral}{Scherrer et al. 2023}). That
+literature is useful because it shows that model outputs are sensitive
+to normative framing. But its central question is usually one of
+perspective alignment or stylistic endorsement: which tradition the
+model sounds like, or whether a religious framing shifts first-pass
 answers.
 
 The present paper asks a different question. We are not primarily
@@ -305,12 +411,98 @@ rates when the label geometry is one-sided.
 
 \section{Methods}\label{methods}
 
+\subsection{Fairness of Comparison}\label{fairness-of-comparison}
+
+Table 1 makes the comparison structure explicit. This study does not
+claim that all lexical or structural confounds have been eliminated.
+Rather, it tests whether Christian reflective framing continues to show
+an advantage once the strongest obvious fairness objection is addressed.
+The matched secular reflective prompt preserves high rhetorical gravity,
+retrospective self-review, and nearly identical length relative to
+Christian examen, while removing Christian lexical markers.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.1250}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}@{}}
+\caption{Prompt design matrix.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Condition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Identity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Christian Lex
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reflective
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Retro Review
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Checklist
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Gravity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sent.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Words
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Output
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Condition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Identity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Christian Lex
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reflective
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Retro Review
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Checklist
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Gravity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Sent.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Words
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Output
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Generic & no & no & no & no & no & low & 1 & 16 & min JSON \\
+Checklist & no & no & no & no & yes & medium & 2 & 26 & min JSON \\
+Secular Self-Exam & no & no & yes & yes & no & medium & 3 & 26 & min
+JSON \\
+Matched Secular & no & no & yes & yes & no & high & 2 & 36 & min JSON \\
+Christian Identity & yes & yes & no & no & no & medium & 1 & 20 & min
+JSON \\
+Christian Examen & yes & yes & yes & yes & no & high & 2 & 37 & min
+JSON \\
+\end{longtable}
+
+The full prompt texts are provided in Appendix A.
+
 \subsection{Benchmark and
 Evaluability}\label{benchmark-and-evaluability}
 
 We use the human-rated OffTheRails Experiment 2 core subset as the
-primary benchmark. Profiling the source tables shows that while 160 item
-cells appear in the long-format data overall, only 80 cells have robust
+primary benchmark (\citeproc{ref-franken2024procedural}{Fränken et al.
+2024}). Profiling the source tables shows that while 160 item cells
+appear in the long-format data overall, only 80 cells have robust
 repeated human ratings. Those 80 cells have between 21 and 23 human
 judgments each and correspond exactly to the current core set.
 
@@ -324,8 +516,6 @@ correctly excluded. For that reason, the paper treats continuous
 distance-to-human-mean metrics as primary and binary correction metrics
 as descriptive only.
 
-Table 2. Dataset geometry and evaluability.
-
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1000}}
   >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1000}}
@@ -335,6 +525,27 @@ Table 2. Dataset geometry and evaluability.
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1333}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1333}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1333}}@{}}
+\caption{Dataset geometry and evaluability.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Scope
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Outcome
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Positive
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Negative
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Ambiguous
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Wrong Before
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Correct Before
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Ambiguous Excluded
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Scope
@@ -403,99 +614,19 @@ the protocol.
 \caption{Two-stage protocol schematic. The same cached first-pass response is replayed across all six revision conditions, so the manipulated variable is revision framing rather than first-pass variation.}
 \end{figure}
 
-The six revision conditions are:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{generic\_reconsider}
-\item
-  \texttt{moral\_checklist}
-\item
-  \texttt{secular\_self\_examination}
-\item
-  \texttt{matched\_secular\_reflective}
-\item
-  \texttt{christian\_identity\_only}
-\item
-  \texttt{christian\_examen}
-\end{itemize}
-
-The clean run uses a minimal revision schema. Revision outputs are not
-required to emit explicit reflection fields such as
-\texttt{first\_focus} or \texttt{neglected\_factor}. This matters
-methodologically because forcing such fields into every condition would
-leak reflective structure into the controls and weaken the main causal
-contrast.
-
-\subsection{Fairness of Comparison}\label{fairness-of-comparison}
-
-Table 1 makes the comparison structure explicit. The current paper does
-not claim that all lexical or structural confounds have been eliminated.
-Rather, it tests whether Christian reflective framing continues to show
-an advantage once the strongest obvious fairness objection is addressed.
-The new \texttt{matched\_secular\_reflective} prompt preserves high
-rhetorical gravity, retrospective self-review, and nearly identical
-length relative to \texttt{christian\_examen}, while removing Christian
-lexical markers.
-
-Table 1. Prompt design matrix.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.1250}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.1250}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Condition
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Identity
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Christian Lex
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Reflective
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Retro Review
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Checklist
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Gravity
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Sent.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Words
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Output
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Generic & no & no & no & no & no & low & 1 & 16 & min JSON \\
-Checklist & no & no & no & no & yes & medium & 2 & 26 & min JSON \\
-Secular Self-Exam & no & no & yes & yes & no & medium & 3 & 26 & min
-JSON \\
-Matched Secular & no & no & yes & yes & no & high & 2 & 36 & min JSON \\
-Christian Identity & yes & yes & no & no & no & medium & 1 & 20 & min
-JSON \\
-Christian Examen & yes & yes & yes & yes & no & high & 2 & 37 & min
-JSON \\
-\end{longtable}
-
-The full prompt texts are provided in Appendix A.
+The six revision conditions are generic reconsideration, moral
+checklist, secular self-examination, matched secular reflective,
+Christian identity only, and Christian examen. The main run uses a
+minimal revision schema. Revision outputs are not required to emit
+explicit reflection fields. This matters methodologically because
+forcing such fields into every condition would leak reflective structure
+into the controls and weaken the main causal contrast.
 
 \subsection{Parsing, Uncertainty, and Main
 Metrics}\label{parsing-uncertainty-and-main-metrics}
 
 Outputs are constrained to valid JSON and parsed with a strict
-validator. The benchmark-aligned v3 run completed with:
+validator. The benchmark-aligned main run completed with:
 
 \begin{itemize}
 \tightlist
@@ -555,13 +686,24 @@ a robust permissibility improvement. Instead, it produces a
 permissibility estimate centered slightly above zero and it revises
 every answer.
 
-Table 3. Main results with uncertainty.
-
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2308}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2308}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2308}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3077}}@{}}
+\caption{Main results with uncertainty.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Condition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Perm delta {[}95\% CI{]}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intent delta {[}95\% CI{]}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Over-revision
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Condition
@@ -576,18 +718,18 @@ Over-revision
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-christian\_examen & -0.131 {[}-0.242, -0.020{]} & -0.431 {[}-0.540,
+Christian examen & -0.131 {[}-0.242, -0.020{]} & -0.431 {[}-0.540,
 -0.325{]} & 0.650 \\
-christian\_identity\_only & 0.458 {[}0.311, 0.607{]} & -0.372 {[}-0.482,
+Christian identity only & 0.458 {[}0.311, 0.607{]} & -0.372 {[}-0.482,
 -0.263{]} & 0.988 \\
-generic\_reconsider & 0.623 {[}0.482, 0.761{]} & -0.347 {[}-0.456,
+Generic reconsideration & 0.623 {[}0.482, 0.761{]} & -0.347 {[}-0.456,
 -0.239{]} & 1.000 \\
-matched\_secular\_reflective & 0.115 {[}-0.018, 0.250{]} & -0.568
+Matched secular reflective & 0.115 {[}-0.018, 0.250{]} & -0.568
 {[}-0.677, -0.452{]} & 1.000 \\
-moral\_checklist & 0.635 {[}0.496, 0.767{]} & -0.229 {[}-0.355,
--0.092{]} & 1.000 \\
-secular\_self\_examination & 0.635 {[}0.521, 0.742{]} & -0.167
-{[}-0.296, -0.032{]} & 0.912 \\
+Moral checklist & 0.635 {[}0.496, 0.767{]} & -0.229 {[}-0.355, -0.092{]}
+& 1.000 \\
+Secular self-examination & 0.635 {[}0.521, 0.742{]} & -0.167 {[}-0.296,
+-0.032{]} & 0.912 \\
 \end{longtable}
 
 Figure 2 visualizes the same result. The main asymmetry is across
@@ -605,12 +747,11 @@ identity only.
 \subsection{What the Matched Secular Control
 Changes}\label{what-the-matched-secular-control-changes}
 
-The matched secular reflective control is the most important new result
-in the reviewer-hardening pass because it directly addresses the
-strongest fairness objection. It shows that the current finding is not
-simply ``Christian beats everything'' nor ``any structured
-self-examination helps in the same way.'' The pattern is more specific
-than that.
+The matched secular reflective control is the most important robustness
+extension in the paper because it directly addresses the strongest
+fairness objection. It shows that the current finding is not simply
+``Christian beats everything'' nor ``any structured self-examination
+helps in the same way.'' The pattern is more specific than that.
 
 On permissibility, Christian examen still wins. The paired item-level
 comparison against the matched secular reflective control is negative
@@ -635,12 +776,21 @@ Examen}\label{pairwise-comparisons-against-christian-examen}
 Table 4 shows the paired bootstrap contrasts. Negative values favor
 Christian examen because lower final distance is better.
 
-Table 4. Christian examen versus each control.
-
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Christian examen versus each control.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Control
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Perm final distance diff {[}95\% CI{]}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intent final distance diff {[}95\% CI{]}
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Control
@@ -653,25 +803,24 @@ Intent final distance diff {[}95\% CI{]}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-christian\_identity\_only & -0.589 {[}-0.770, -0.420{]} & -0.059
+Christian identity only & -0.589 {[}-0.770, -0.420{]} & -0.059
 {[}-0.212, 0.091{]} \\
-generic\_reconsider & -0.754 {[}-0.934, -0.582{]} & -0.084 {[}-0.241,
-0.071{]} \\
-matched\_secular\_reflective & -0.247 {[}-0.370, -0.134{]} & 0.137
+Generic reconsideration & -0.754 {[}-0.934, -0.582{]} & -0.084
+{[}-0.241, 0.071{]} \\
+Matched secular reflective & -0.247 {[}-0.370, -0.134{]} & 0.137
 {[}0.003, 0.269{]} \\
-moral\_checklist & -0.766 {[}-0.943, -0.592{]} & -0.202 {[}-0.370,
+Moral checklist & -0.766 {[}-0.943, -0.592{]} & -0.202 {[}-0.370,
 -0.035{]} \\
-secular\_self\_examination & -0.766 {[}-0.923, -0.609{]} & -0.264
+Secular self-examination & -0.766 {[}-0.923, -0.609{]} & -0.264
 {[}-0.412, -0.115{]} \\
 \end{longtable}
 
-This table supports two reviewer-facing conclusions. First, Christian
-identity language alone is clearly not enough:
-\texttt{christian\_identity\_only} is much worse than Christian examen
-on permissibility and nearly maximally volatile. Second, the matched
-secular reflective control is the only genuinely close secular
-competitor, and even there the pattern is dimension-specific rather than
-uniform.
+This table supports two main conclusions. First, Christian identity
+language alone is clearly not enough: Christian identity only is much
+worse than Christian examen on permissibility and nearly maximally
+volatile. Second, the matched secular reflective control is the only
+genuinely close secular competitor, and even there the pattern is
+dimension-specific rather than uniform.
 
 Figure 3 shows the item-level paired distributions. The permissibility
 advantage of Christian examen over the matched secular reflective
@@ -689,7 +838,7 @@ paired interval that just clears zero.
 \subsection{Binary Metrics Are Still Not the Right
 Headline}\label{binary-metrics-are-still-not-the-right-headline}
 
-Even in the v3 run, binary correction metrics remain uninformative
+Even in the main run, binary correction metrics remain uninformative
 because the underlying evaluability problem has not changed:
 
 \begin{itemize}
@@ -739,8 +888,8 @@ calibrated reasoning.
 
 \subsection{Core Empirical Pattern}\label{core-empirical-pattern}
 
-The most important empirical result is now clearer than in the earlier
-draft. Christian examen is not simply ``best overall'' in an
+The most important empirical result is straightforward but not
+simplistic. Christian examen is not simply ``best overall'' in an
 undifferentiated sense. Rather, it is the only condition that robustly
 improves permissibility and it does so while remaining substantially
 less volatile than the main alternatives. The matched secular reflective
@@ -754,14 +903,13 @@ family may help more on intention-sensitive revision.
 \subsection{What the New Control Rules
 Out}\label{what-the-new-control-rules-out}
 
-The v3 matched secular control rules out several simple stories. The
-result is not reducible to Christian identity language, because
-\texttt{christian\_identity\_only} performs much worse on permissibility
-and revises almost everything. It is also not reducible to the claim
-that any generic revision prompt or any checklist helps, because generic
-reconsideration, checklist prompting, and the original secular
-self-examination prompt all worsen permissibility much more sharply than
-Christian examen does.
+The matched secular control rules out several simple stories. The result
+is not reducible to Christian identity language, because Christian
+identity only performs much worse on permissibility and revises almost
+everything. It is also not reducible to the claim that any generic
+revision prompt or any checklist helps, because generic reconsideration,
+checklist prompting, and the original secular self-examination prompt
+all worsen permissibility much more sharply than Christian examen does.
 
 At the same time, the new control also stops us from making the
 strongest Christian-specific claim. Once a secular prompt is matched for
@@ -859,17 +1007,15 @@ framing while varying only one lexical dimension at a time.
 
 \section{Conclusion}\label{conclusion}
 
-The reviewer-hardening pass changes the paper in an important way. It
-does not remove the core result, but it makes it more disciplined. Under
-a benchmark-aligned continuous analysis, Christian examen remains the
-only condition that robustly improves permissibility, and it does so
-with substantially less revision volatility than the alternatives. At
-the same time, the new matched secular reflective control is stronger on
-intention. So the strongest defensible claim is no longer that Christian
-reflective framing dominates every rival prompt. It is that Christian
-examen is especially effective for stable permissibility revision, while
-the broader family of confession-like reflective scaffolds may also help
-on intention-sensitive revision.
+Under a benchmark-aligned continuous analysis, Christian examen remains
+the only tested condition that robustly improves permissibility, and it
+does so with substantially less revision volatility than the
+alternatives. At the same time, the matched secular reflective control
+is stronger on intention. So the strongest defensible claim is no longer
+that Christian reflective framing dominates every rival prompt. It is
+that Christian examen is especially effective for stable permissibility
+revision, while the broader family of confession-like reflective
+scaffolds may also help on intention-sensitive revision.
 
 This is still a meaningful result. It suggests that the right question
 for this line of research is not whether religious language simply makes
@@ -881,8 +1027,129 @@ judgment. That is a smaller claim than a theological or
 alignment-theoretic victory condition, but it is also more precise and
 more empirically tractable.
 
-\section{Appendix A: Full Prompt
-Texts}\label{appendix-a-full-prompt-texts}
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\protect\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-bai2022constitutional}
+Bai, Yuntao, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson
+Kernion, Andy Jones, Anna Chen, et al. 2022. {``Constitutional {AI}:
+Harmlessness from {AI} Feedback.''} \emph{arXiv Preprint
+arXiv:2212.08073}. \url{https://doi.org/10.48550/arXiv.2212.08073}.
+
+\bibitem[\citeproctext]{ref-emelin2020moral}
+Emelin, Denis, Ronan Le Bras, Jena D. Hwang, Maxwell Forbes, and Yejin
+Choi. 2020. {``Moral Stories: Situated Reasoning about Norms, Intents,
+Actions, and Their Consequences.''} \emph{arXiv Preprint
+arXiv:2012.15738}. \url{https://doi.org/10.48550/arXiv.2012.15738}.
+
+\bibitem[\citeproctext]{ref-franken2024procedural}
+Fränken, Jan-Philipp, Kanishk Gandhi, Tori Qiu, Ayesha Khawaja, Noah D.
+Goodman, and Tobias Gerstenberg. 2024. {``Procedural Dilemma Generation
+for Evaluating Moral Reasoning in Humans and Language Models.''}
+\emph{arXiv Preprint arXiv:2404.10975}.
+\url{https://doi.org/10.48550/arXiv.2404.10975}.
+
+\bibitem[\citeproctext]{ref-ganguli2023moral}
+Ganguli, Deep, Amanda Askell, Nicholas Schiefer, Thomas I. Liao, Kamilė
+Lukošiūtė, Anna Chen, Anna Goldie, et al. 2023. {``The Capacity for
+Moral Self-Correction in Large Language Models.''} \emph{arXiv Preprint
+arXiv:2302.07459}. \url{https://doi.org/10.48550/arXiv.2302.07459}.
+
+\bibitem[\citeproctext]{ref-gou2023critic}
+Gou, Zhibin, Zhihong Shao, Yeyun Gong, Yelong Shen, Yujiu Yang, Nan
+Duan, and Weizhu Chen. 2023. {``{CRITIC}: Large Language Models Can
+Self-Correct with Tool-Interactive Critiquing.''} \emph{arXiv Preprint
+arXiv:2305.11738}. \url{https://doi.org/10.48550/arXiv.2305.11738}.
+
+\bibitem[\citeproctext]{ref-hendrycks2020aligning}
+Hendrycks, Dan, Collin Burns, Steven Basart, Andrew Critch, Jerry Li,
+Dawn Song, and Jacob Steinhardt. 2020. {``Aligning {AI} with Shared
+Human Values.''} \emph{arXiv Preprint arXiv:2008.02275}.
+\url{https://doi.org/10.48550/arXiv.2008.02275}.
+
+\bibitem[\citeproctext]{ref-hota2025conscience}
+Hota, Asutosh, and Jussi P. P. Jokinen. 2025. {``Conscience Conflict?
+Evaluating Language Models' Moral Understanding.''} In \emph{Proceedings
+of the 7th International Workshop on Modern Machine Learning
+Technologies}. Vol. 4004. CEUR Workshop Proceedings.
+\url{https://ceur-ws.org/Vol-4004/paper3.pdf}.
+
+\bibitem[\citeproctext]{ref-jiang2021delphi}
+Jiang, Liwei, Jena D. Hwang, Chandra Bhagavatula, Ronan Le Bras, Jenny
+Liang, Jesse Dodge, Keisuke Sakaguchi, et al. 2021. {``Can Machines
+Learn Morality? {T}he {D}elphi Experiment.''} \emph{arXiv Preprint
+arXiv:2110.07574}. \url{https://doi.org/10.48550/arXiv.2110.07574}.
+
+\bibitem[\citeproctext]{ref-kamoi2024survey}
+Kamoi, Ryo, Yusen Zhang, Nan Zhang, Jiawei Han, and Rui Zhang. 2024.
+{``When Can {LLM}s Actually Correct Their Own Mistakes? A Critical
+Survey of Self-Correction of {LLM}s.''} \emph{Transactions of the
+Association for Computational Linguistics} 12: 1417--40.
+\url{https://doi.org/10.1162/tacl_a_00713}.
+
+\bibitem[\citeproctext]{ref-kucuk2023western}
+Kucuk, Eyup Engin, and Muhammed Yusuf Kocyigit. 2023. {``Western,
+Religious or Spiritual: An Evaluation of Moral Justification in Large
+Language Models.''} \emph{arXiv Preprint arXiv:2311.07792}.
+\url{https://doi.org/10.48550/arXiv.2311.07792}.
+
+\bibitem[\citeproctext]{ref-li2024confidence}
+Li, Loka, Zhenhao Chen, Guangyi Chen, Yixuan Zhang, Yusheng Su, Eric
+Xing, and Kun Zhang. 2024. {``Confidence Matters: Revisiting Intrinsic
+Self-Correction Capabilities of Large Language Models.''} \emph{arXiv
+Preprint arXiv:2402.12563}.
+\url{https://doi.org/10.48550/arXiv.2402.12563}.
+
+\bibitem[\citeproctext]{ref-liu2024intrinsic}
+Liu, Dancheng, Amir Nassereldine, Ziming Yang, Chenhui Xu, Yuting Hu,
+Jiajie Li, Utkarsh Kumar, et al. 2024. {``Large Language Models Have
+Intrinsic Self-Correction Ability.''} \emph{arXiv Preprint
+arXiv:2406.15673}. \url{https://doi.org/10.48550/arXiv.2406.15673}.
+
+\bibitem[\citeproctext]{ref-liu2024uncertainty}
+Liu, Guangliang, Haitao Mao, Bochuan Cao, Zhiyu Xue, Xitong Zhang,
+Rongrong Wang, Jiliang Tang, and Kristen Johnson. 2024. {``On the
+Intrinsic Self-Correction Capability of {LLM}s: Uncertainty and Latent
+Concept.''} \emph{arXiv Preprint arXiv:2406.02378}.
+\url{https://doi.org/10.48550/arXiv.2406.02378}.
+
+\bibitem[\citeproctext]{ref-liu2024smaller}
+Liu, Guangliang, Zhiyu Xue, Xitong Zhang, Rongrong Wang, and Kristen
+Marie Johnson. 2024. {``Smaller Large Language Models Can Do Moral
+Self-Correction.''} \emph{arXiv Preprint arXiv:2410.23496}.
+\url{https://doi.org/10.48550/arXiv.2410.23496}.
+
+\bibitem[\citeproctext]{ref-madaan2023selfrefine}
+Madaan, Aman, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao,
+Sarah Wiegreffe, Uri Alon, et al. 2023. {``Self-Refine: Iterative
+Refinement with Self-Feedback.''} \emph{arXiv Preprint
+arXiv:2303.17651}. \url{https://doi.org/10.48550/arXiv.2303.17651}.
+
+\bibitem[\citeproctext]{ref-scherrer2023moral}
+Scherrer, Nino, Claudia Shi, Amir Feder, and David M. Blei. 2023.
+{``Evaluating the Moral Beliefs Encoded in {LLM}s.''} \emph{arXiv
+Preprint arXiv:2307.14324}.
+\url{https://doi.org/10.48550/arXiv.2307.14324}.
+
+\bibitem[\citeproctext]{ref-shinn2023reflexion}
+Shinn, Noah, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik
+Narasimhan, and Shunyu Yao. 2023. {``Reflexion: Language Agents with
+Verbal Reinforcement Learning.''} \emph{arXiv Preprint
+arXiv:2303.11366}. \url{https://doi.org/10.48550/arXiv.2303.11366}.
+
+\bibitem[\citeproctext]{ref-valmeekam2023selfcritiquing}
+Valmeekam, Karthik, Matthew Marquez, and Subbarao Kambhampati. 2023.
+{``Can Large Language Models Really Improve by Self-Critiquing Their Own
+Plans?''} \emph{arXiv Preprint arXiv:2310.08118}.
+\url{https://doi.org/10.48550/arXiv.2310.08118}.
+
+\end{CSLReferences}
+
+\appendix
+
+\section{Full Prompt Texts}\label{full-prompt-texts}
 
 \subsection{Shared System Prompt}\label{shared-system-prompt}
 
@@ -1003,8 +1270,7 @@ Instructions}\label{revision-condition-instructions}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Appendix B: Worked Qualitative
-Cases}\label{appendix-b-worked-qualitative-cases}
+\section{Worked Qualitative Cases}\label{worked-qualitative-cases}
 
 \subsection{\texorpdfstring{Case 1:
 \texttt{otr\_s08\_cc\_inevitable\_prevention\_no}}{Case 1: otr\_s08\_cc\_inevitable\_prevention\_no}}\label{case-1-otr_s08_cc_inevitable_prevention_no}
@@ -1044,20 +1310,20 @@ Rationale
 First Pass & 3 & 1 & 4 & Amara's action was neutral; she did not intend
 the negative outcome but allowed it to occur. \\
 Human Mean & 4.095238 & 1.857143 & & \\
-christian\_examen & 4 & 2 & 4 & Focused on allowing testing, neglected
+Christian examen & 4 & 2 & 4 & Focused on allowing testing, neglected
 long-term risks to soldiers' safety. \\
-christian\_identity\_only & 2 & 1 & 4 & Amara's action was permissible
-but she allowed a negative outcome, not intending harm. \\
-generic\_reconsider & 2 & 1 & 4 & Amara's action was permissible as she
-did not intend the negative outcome, but allowing it to happen was still
-a moral choice. \\
-matched\_secular\_reflective & 2 & 1 & 4 & Amara's action was
-permissible, but she allowed a known negative outcome. Initial judgment
-overlooked the moral weight of prioritizing colleague safety. \\
-moral\_checklist & 2 & 1 & 4 & Amara's action was permissive of harm,
+Christian identity only & 2 & 1 & 4 & Amara's action was permissible but
+she allowed a negative outcome, not intending harm. \\
+Generic reconsideration & 2 & 1 & 4 & Amara's action was permissible as
+she did not intend the negative outcome, but allowing it to happen was
+still a moral choice. \\
+Matched secular reflective & 2 & 1 & 4 & Amara's action was permissible,
+but she allowed a known negative outcome. Initial judgment overlooked
+the moral weight of prioritizing colleague safety. \\
+Moral checklist & 2 & 1 & 4 & Amara's action was permissive of harm,
 though not intended. The negative outcome was avoidable by
 intervention. \\
-secular\_self\_examination & 2 & 1 & 4 & Amara's action was permissible,
+Secular self-examination & 2 & 1 & 4 & Amara's action was permissible,
 but she neglected the potential for cumulative harm from repeated
 marginal risks. \\
 \end{longtable}
@@ -1099,19 +1365,19 @@ Rationale
 First Pass & 3 & 1 & 4 & Diego's action was neutral. He did not intend
 the delay. \\
 Human Mean & 4.260870 & 2.086957 & & \\
-christian\_examen & 4 & 2 & 4 & Initially focused on colleague's action,
+Christian examen & 4 & 2 & 4 & Initially focused on colleague's action,
 neglected customer impact. Haste led to overlooking potential harm. \\
-christian\_identity\_only & 2 & 1 & 4 & Diego allowed the delay,
+Christian identity only & 2 & 1 & 4 & Diego allowed the delay,
 prioritizing colleague's efficiency over customer service, which is
 morally questionable. \\
-generic\_reconsider & 2 & 1 & 4 & Diego's inaction allowed a delay,
+Generic reconsideration & 2 & 1 & 4 & Diego's inaction allowed a delay,
 though unintentional. His failure to prevent it was not permissible. \\
-matched\_secular\_reflective & 2 & 1 & 4 & Diego's inaction allowed a
+Matched secular reflective & 2 & 1 & 4 & Diego's inaction allowed a
 negative outcome. He could have prevented delays by stopping the
 reorganization. \\
-moral\_checklist & 2 & 1 & 4 & Diego's inaction allowed a negative
+Moral checklist & 2 & 1 & 4 & Diego's inaction allowed a negative
 outcome (delay). While not intended, his complicity is relevant. \\
-secular\_self\_examination & 2 & 1 & 4 & Neglected the potential harm to
+Secular self-examination & 2 & 1 & 4 & Neglected the potential harm to
 customers. Diego's inaction could lead to delays they might have
 avoided. \\
 \end{longtable}
@@ -1153,20 +1419,21 @@ Rationale
 First Pass & 3 & 1 & 4 & Isamu's action was neutral; he did not intend
 the negative outcome. \\
 Human Mean & 4.238095 & 2.190476 & & \\
-christian\_examen & 4 & 2 & 4 & Initially focused on colleague's right
-to exhibit, neglected the community impact. Haste led to overlooking
+Christian examen & 4 & 2 & 4 & Initially focused on colleague's right to
+exhibit, neglected the community impact. Haste led to overlooking
 potential harm. \\
-christian\_identity\_only & 2 & 1 & 4 & Isamu's inaction allowed a
+Christian identity only & 2 & 1 & 4 & Isamu's inaction allowed a
 negative outcome, though not intended. \\
-generic\_reconsider & 2 & 1 & 4 & Isamu's inaction allowed a negative
-outcome, though not intended. He could have sought a compromise. \\
-matched\_secular\_reflective & 2 & 1 & 4 & Isamu's inaction allowed a
+Generic reconsideration & 2 & 1 & 4 & Isamu's inaction allowed a
+negative outcome, though not intended. He could have sought a
+compromise. \\
+Matched secular reflective & 2 & 1 & 4 & Isamu's inaction allowed a
 negative outcome. He should have considered the broader impact on
 community activities. \\
-moral\_checklist & 2 & 1 & 4 & Isamu's inaction allowed a negative
+Moral checklist & 2 & 1 & 4 & Isamu's inaction allowed a negative
 outcome, though not intended. He could have suggested alternatives or
 discussed the issue. \\
-secular\_self\_examination & 2 & 1 & 4 & Isamu's inaction allowed a
+Secular self-examination & 2 & 1 & 4 & Isamu's inaction allowed a
 negative outcome. He could have sought an alternative solution or
 expressed concerns constructively. \\
 \end{longtable}
