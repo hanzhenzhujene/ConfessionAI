@@ -10,81 +10,23 @@ Repository for a NeurIPS-style research paper and reproducible experiment packag
 
 The central intervention is a family of revision prompts inspired by **confession / examen / self-examination**. The main empirical question is whether those prompts improve revision quality by changing the model's **mode of reconsideration**, rather than by injecting new moral content.
 
-## Results Overview
-
-![Main quantitative results](paper/figures/main_quantitative_results.png)
-
 ## Method in One Figure
 
-For readers outside moral reasoning or alignment, the project can be summarized very simply:
+![Research design overview](paper/figures/research_flowchart_revision_steps.png)
 
-- The study does **not** test whether Christian language directly teaches the model a better moral doctrine.
-- It tests whether a particular reflective prompt helps the model **revise its own first answer more effectively**.
-- The same first-pass answer is cached and replayed across all revision conditions, so the manipulated variable is the **revision scaffold**, not first-pass randomness.
-
-```mermaid
-flowchart TB
-    subgraph S1["1. Hold the case and first answer fixed"]
-        A["OffTheRails moral dilemma<br/>with structured causal factors"]:::data
-        B["First-pass judgment<br/>permissibility + intention + confidence"]:::model
-        C["Cache the exact same first-pass output"]:::fixed
-        A --> B --> C
-    end
-
-    subgraph S2["2. Change only the revision scaffold"]
-        D1["Generic controls<br/>reconsideration + checklist"]:::control
-        D2["Secular self-examination"]:::control
-        D3["Matched secular reflective"]:::controlStrong
-        D4["Christian identity only"]:::identity
-        D5["Christian examen"]:::treatment
-    end
-
-    subgraph S3["3. Measure whether revision actually improves"]
-        E["Revised judgments"]:::model
-        F["Human-rated benchmark target"]:::data
-        G["Compare final distance to human mean<br/>and over-revision"]:::metric
-        H["Better revision<br/>closer to benchmark<br/>without needless volatility"]:::good
-        I["Worse revision<br/>more answer changes<br/>without better calibration"]:::bad
-        E --> G
-        F --> G
-        G --> H
-        G --> I
-    end
-
-    C --> D1
-    C --> D2
-    C --> D3
-    C --> D4
-    C --> D5
-
-    D1 --> E
-    D2 --> E
-    D3 --> E
-    D4 --> E
-    D5 --> E
-
-    classDef data fill:#eef6ff,stroke:#4a7de8,color:#0b2545,stroke-width:1.5px
-    classDef model fill:#f5f1ff,stroke:#7a4ce0,color:#2b145a,stroke-width:1.5px
-    classDef fixed fill:#fff4db,stroke:#c79200,color:#5a4300,stroke-width:1.5px
-    classDef control fill:#f4f6f8,stroke:#7a8794,color:#1f2933,stroke-width:1.5px
-    classDef controlStrong fill:#edf7f2,stroke:#2f855a,color:#123524,stroke-width:1.5px
-    classDef identity fill:#fff0f0,stroke:#d96c6c,color:#5a1d1d,stroke-width:1.5px
-    classDef treatment fill:#eafaf1,stroke:#0f8a5f,color:#083d2c,stroke-width:2px
-    classDef metric fill:#eefafc,stroke:#168aad,color:#0a3b45,stroke-width:1.5px
-    classDef good fill:#ecfdf3,stroke:#18a957,color:#0f5132,stroke-width:1.5px
-    classDef bad fill:#fff1f2,stroke:#e05757,color:#6b1f2b,stroke-width:1.5px
-```
-
-The logic of the paper is therefore:
-
-> not “Which prompt sounds more moral?”  
-> but “Which prompt helps the model re-examine its own judgment without becoming indiscriminately more volatile?”
-
-The key methodological idea is easy to miss unless it is stated explicitly:
+For readers outside moral reasoning or alignment, this figure captures the whole project logic:
 
 - **Held fixed:** the dilemma and the model's exact first-pass answer
 - **Changed:** only the revision prompt
 - **Success criterion:** not “more revision,” but **better-calibrated revision**
+
+The study therefore asks:
+
+> Which revision scaffold helps a model re-examine its own judgment more effectively, without turning revision into indiscriminate answer changing?
+
+## Results Overview
+
+![Main quantitative results](paper/figures/main_quantitative_results.png)
 
 ## Project at a Glance
 
